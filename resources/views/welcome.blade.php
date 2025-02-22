@@ -95,7 +95,7 @@
         }
         footer {
             text-align: center;
-            padding: 20px 0; 
+            padding: 20px 0;
             color: #0b0b0b;
             margin-top: 100px;
         }
@@ -108,7 +108,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Welcome to GlowSkin</h1>
+            <h1>Welcome to Beautify Skin Care</h1>
             <p>Your journey to radiant skin starts here.</p>
         </header>
 
