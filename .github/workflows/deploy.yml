@@ -1,0 +1,45 @@
+name: Deploy Laravel App to Lightsail
+
+on:
+  push:
+    branches:
+      - main  # This triggers deployment on pushing to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub runner will use Ubuntu to run the workflow
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2  # Pulls your code from GitHub repository
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}  # Uses the private SSH key to authenticate
+
+      - name: Copy files to server
+        run: |
+          rsync -avz --exclude '.git*' --exclude 'node_modules' ./ ubuntu@${{ secrets.AWS_SERVER_IP }}:/var/www/html/beautifyskincare
+
+      - name: SSH Commands to Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.AWS_SERVER_IP }} << 'EOF'
+            cd /var/www/html/beautifyskincare
+            git pull origin main
+            composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+            php artisan config:clear
+            php artisan config:cache
+            php artisan route:clear
+            php artisan route:cache
+            php artisan view:clear
+            php artisan view:cache
+            php artisan migrate --force
+            php artisan optimize
+            sudo systemctl restart apache2
+            echo "Deployment completed successfully!"
+          EOF
+
+      - name: Verify Deployment Success
+        run: |
+          curl --silent --fail http://${{ secrets.AWS_SERVER_IP }} || exit 1  # Ensures the app is up and running
