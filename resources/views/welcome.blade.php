@@ -115,7 +115,7 @@
         <div class="hero">
             <img src="https://placehold.co/600x400/EEE/31343C" alt="Skincare Products">
             <div class="hero-text">
-                <h2>Discover Your Glow..</h2>
+                <h2>Discover Your Glow</h2>
                 <p>Our premium skincare products are designed to nourish, protect, and rejuvenate your skin. Experience the difference with GlowSkin.</p>
             </div>
         </div>
