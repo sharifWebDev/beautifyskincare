@@ -117,7 +117,6 @@
             <div class="hero-text">
                 <h2>Discover Your Glow</h2>
                 <p>Our premium skincare products are designed to nourish, protect, and rejuvenate your skin. Experience the difference with GlowSkin.</p>
-                <a href="#" class="cta-button">Shop Now</a>
             </div>
         </div>
 
