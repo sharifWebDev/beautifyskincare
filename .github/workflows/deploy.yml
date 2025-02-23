@@ -29,7 +29,7 @@ jobs:
       # Step 4: Copy files to server using rsync
       - name: Copy files to server
         run: |
-          rsync -avz --exclude '.git*' --exclude 'node_modules' ./ ubuntu@${{ secrets.AWS_SERVER_IP }}:/var/www/html/beautifyskincare
+          rsync -avz --no-times --exclude '.git*' --exclude 'node_modules' ./ ubuntu@${{ secrets.AWS_SERVER_IP }}:/var/www/html/beautifyskincare
 
       # Step 5: SSH commands to restart Apache and run other commands
       - name: SSH Commands to Restart Apache
